@@ -116,10 +116,6 @@ function reset(){
 }
 
 function reset_score(r){
-    if (auto === 0) {
-        autoplay=0;
-        autoplay();
-    }
     if(r){
         score.wins=0;
         score.losses=0;
@@ -128,25 +124,28 @@ function reset_score(r){
         let r=document.querySelector('.reset-button');
         r.innerHTML=`
         <button class="reset" onclick="reset()">Reset Score</button>
-        <button class="js-autoplay" onclick="autoplay()">Auto Play</button>    
+        <button class="js-autoplay" onclick="autoplay()"></button>
         `;
+        auto=1;
     }
     else{
     let r=document.querySelector('.reset-button');
         r.innerHTML=`
         <button class="reset" onclick="reset()">Reset Score</button>
-        <button class="js-autoplay" onclick="autoplay()">Auto Play</button>    
+        <button class="js-autoplay" onclick="autoplay()"></button>
         `;
+        auto=0;
     }
+    autoplay();
 }
 
 let autoplayInterval;
-let auto=1;
+let auto;
 
 function autoplay() {
     let c;
-    if (auto) { 
-        auto = 0;
+    if (!auto) { 
+        auto = 1;
         c = document.querySelector('.js-autoplay');
         c.innerHTML = `Stop`;
         autoplayInterval = setInterval(() => {
@@ -159,9 +158,9 @@ function autoplay() {
                 playerMove = 'scissors';
             }
             update(playerMove);
-        }, 1000);
+        }, 500);
     } else {
-        auto = 1;
+        auto = 0;
         c = document.querySelector('.js-autoplay');
         c.innerHTML = `Auto Play`;
         clearInterval(autoplayInterval);
