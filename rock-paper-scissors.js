@@ -117,7 +117,7 @@ function reset(){
 
 function reset_score(r){
     if (auto === 0) {
-        auto=1;
+        autoplay=0;
         autoplay();
     }
     if(r){
@@ -126,6 +126,13 @@ function reset_score(r){
         score.tie=0;
         display();
         let r=document.querySelector('.reset-button');
+        r.innerHTML=`
+        <button class="reset" onclick="reset()">Reset Score</button>
+        <button class="js-autoplay" onclick="autoplay()">Auto Play</button>    
+        `;
+    }
+    else{
+    let r=document.querySelector('.reset-button');
         r.innerHTML=`
         <button class="reset" onclick="reset()">Reset Score</button>
         <button class="js-autoplay" onclick="autoplay()">Auto Play</button>    
